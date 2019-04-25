@@ -21,15 +21,5 @@ else
     BUILD_ZFORP=ON
   fi
 
-  run_all " -DBUILD_CFP=ON -DCFP_NAMESPACE=cfp2 -DBUILD_PYTHON=ON -DBUILD_ZFORP=${BUILD_ZFORP} -DZFP_WITH_ALIGNED_ALLOC=1 -DBUILD_OPENMP=OFF -DBUILD_CUDA=OFF"
-
-  rm -rf ./* ;
-
-  # if OpenMP available, start a 2nd build with it
-  if cmake ../tests/ci-utils/ ; then
-    rm -rf ./* ;
-
-    # build/test with OpenMP
-    run_all " -DBUILD_OPENMP=ON"
-  fi
+  run_all " -DBUILD_PYTHON=ON -DBUILD_OPENMP=OFF -DBUILD_CUDA=OFF"
 fi
