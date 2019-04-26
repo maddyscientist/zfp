@@ -1,3 +1,18 @@
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/../../python/scikit-build-cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/../../python/eyescale-cmake)
+include(UseCython)
+include(FindPythonExtensions)
+include(FindNumPy)
+
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+find_package(PythonExtensions REQUIRED)
+find_package(Cython REQUIRED)
+find_package(NumPy REQUIRED)
+
+include_directories(${ZFP_SOURCE_DIR}/include)
+include_directories(${PYTHON_NUMPY_INCLUDE_DIR})
+
 include_directories(${ZFP_SOURCE_DIR}/tests/utils)
 include_directories(${ZFP_SOURCE_DIR})
 add_cython_target(test_utils test_utils.pyx C)
