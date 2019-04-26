@@ -1,8 +1,5 @@
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/../../python/scikit-build-cmake)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/../../python/eyescale-cmake)
-include(UseCython)
-include(FindPythonExtensions)
-include(FindNumPy)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/python/scikit-build-cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/python/eyescale-cmake)
 
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)
