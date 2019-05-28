@@ -59,13 +59,6 @@ if(BUILD_ZFPY)
     -DPYTHON_INCLUDE_DIR=${PYTHON_INCLUDE_DIR}
     -DPYTHON_LIBRARY=$ENV{PYTHON_LIB_PATH}
     )
-
-  # cython bug on mingw-w64
-  if($ENV{COMPILER} STREQUAL "mingw-w64")
-    list(APPEND cfg_options
-      -DCMAKE_C_FLAGS=-DMS_WIN64
-      )
-  endif()
 endif()
 
 if(OMP_TESTS_ONLY)

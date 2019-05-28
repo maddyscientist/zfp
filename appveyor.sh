@@ -19,8 +19,10 @@ BUILD_FLAGS="$BUILD_FLAGS -DBUILD_EXAMPLES=ON"
 #BUILD_FLAGS="$BUILD_FLAGS -DBUILD_CFP=ON"
 #BUILD_FLAGS="$BUILD_FLAGS -DCFP_NAMESPACE=cfp2"
 
-# zfpy only built for Release builds
-if [ $BUILD_TYPE == "Release" ]; then
+# zfpy only built for MSVC, Release builds
+if [ $COMPILER == "msvc" ] && [ $BUILD_TYPE == "Release" ]; then
+  # verify active python version matches what was specified in appveyor.yml
+
   # fetch python version X.Y (single digits only)
   ACTIVE_PY_VERSION=$(python -c 'import platform; print(platform.python_version())' | cut -c1-3)
   # $PYTHON_VERSION comes from appveyor.yml and has form XY (no dot separating major and minor versions)

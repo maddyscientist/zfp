@@ -3,27 +3,25 @@ version: 0.5.5-{build}
 environment:
   # zfpy only build for Release builds (otherwise need debug python libs python27_d.lib)
   matrix:
-#    - COMPILER: mingw
-#      GENERATOR: MinGW Makefiles
-#      PLATFORM: Win32
-#      BUILD_TYPE: Debug
-#
-#    - COMPILER: mingw
-#      GENERATOR: MinGW Makefiles
-#      PLATFORM: Win32
-#      BUILD_TYPE: Release
-#      PYTHON_VERSION: 27
-#
-#    - COMPILER: mingw-w64
-#      GENERATOR: MinGW Makefiles
-#      PLATFORM: x64
-#      BUILD_TYPE: Debug
+    - COMPILER: mingw
+      GENERATOR: MinGW Makefiles
+      PLATFORM: Win32
+      BUILD_TYPE: Debug
+
+    - COMPILER: mingw
+      GENERATOR: MinGW Makefiles
+      PLATFORM: Win32
+      BUILD_TYPE: Release
+
+    - COMPILER: mingw-w64
+      GENERATOR: MinGW Makefiles
+      PLATFORM: x64
+      BUILD_TYPE: Debug
 
     - COMPILER: mingw-w64
       GENERATOR: MinGW Makefiles
       PLATFORM: x64
       BUILD_TYPE: Release
-      PYTHON_VERSION: 35
 
     - COMPILER: msvc
       GENERATOR: Visual Studio 15 2017 Win64
@@ -78,7 +76,7 @@ install:
   - if "%COMPILER%"=="mingw-w64" set PATH=C:\MinGW\bin;%PATH%
 #  - if "%COMPILER%"=="mingw-w64" set PATH=C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64\bin;%PATH%
 
-  # set env vars for Python system dir
+  # set env vars for Python system dir (assumed to always be MSVC)
   - ps: |
       if ($env:PYTHON_VERSION) {
         $env:PYTHON_DIR = "C:\Python$env:PYTHON_VERSION"
@@ -86,13 +84,7 @@ install:
           $env:PYTHON_DIR = "$env:PYTHON_DIR-x64"
         }
 
-        $env:PYTHON_LIB_PATH = "$env:PYTHON_DIR\libs"
-        if ($env:COMPILER -eq "msvc") {
-          $env:PYTHON_LIB_PATH = "$env:PYTHON_LIB_PATH\python$env:PYTHON_VERSION.lib"
-        } else {
-          # mingw
-          $env:PYTHON_LIB_PATH = "$env:PYTHON_LIB_PATH\libpython$env:PYTHON_VERSION.a"
-        }
+        $env:PYTHON_LIB_PATH = "$env:PYTHON_DIR\libs\python$env:PYTHON_VERSION.lib"
       }
 
   # placing these behind a conditional for some reason prevents CMake from picking up the virtualEnv
@@ -106,5 +98,4 @@ install:
   - python --version
 
 build_script:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - sh appveyor.sh
