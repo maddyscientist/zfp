@@ -34,7 +34,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PLATFORM: x64
       BUILD_TYPE: Release
-      PYTHON_VERSION: 35
+      PYTHON_VERSION: 27
 
 #    - COMPILER: msvc
 #      GENERATOR: Visual Studio 15 2017
@@ -47,7 +47,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PLATFORM: Win32
       BUILD_TYPE: Release
-      PYTHON_VERSION: 27
+      PYTHON_VERSION: 35
 
 #    - COMPILER: msvc
 #      GENERATOR: Visual Studio 14 2015 Win64
@@ -58,7 +58,7 @@ environment:
       GENERATOR: Visual Studio 14 2015 Win64
       PLATFORM: x64
       BUILD_TYPE: Release
-      PYTHON_VERSION: 27
+      PYTHON_VERSION: 35
 
 #    - COMPILER: msvc
 #      GENERATOR: Visual Studio 14 2015
@@ -69,7 +69,7 @@ environment:
       GENERATOR: Visual Studio 14 2015
       PLATFORM: Win32
       BUILD_TYPE: Release
-      PYTHON_VERSION: 35
+      PYTHON_VERSION: 27
 
 install:
   - if "%COMPILER%"=="mingw" set PATH=C:\MinGW\bin;%PATH%
@@ -93,6 +93,7 @@ install:
   - set VIRTUALENV_NAME=pyVirtualEnv
   - virtualenv %VIRTUALENV_NAME%
   - "%VIRTUALENV_NAME%\\Scripts\\activate.bat"
+  - python -m pip install setuptools --upgrade
   - python -m pip install -r python\requirements.txt
   - python --version
 
