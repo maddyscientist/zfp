@@ -55,9 +55,9 @@ endif()
 add_subdirectory(utils)
 add_subdirectory(src)
 
-if(BUILD_CFP)
-  add_subdirectory(cfp)
-endif()
+#if(BUILD_CFP)
+#  add_subdirectory(cfp)
+#endif()
 
 if(BUILD_ZFORP)
   add_subdirectory(fortran)
