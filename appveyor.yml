@@ -93,7 +93,7 @@ install:
   - set VIRTUALENV_NAME=pyVirtualEnv
   - virtualenv %VIRTUALENV_NAME%
   - "%VIRTUALENV_NAME%\\Scripts\\activate.bat"
-  - pip install -r python\requirements.txt
+  - python -m pip install -r python\requirements.txt
   - python --version
 
 build_script:
